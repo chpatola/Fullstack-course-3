@@ -29,6 +29,7 @@ if (process.argv.length == 3) {
         })
         mongoose.connection.close()
     })
+    
 }
 
 if (process.argv.length > 4) {

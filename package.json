@@ -10,7 +10,8 @@
     "build:ui": "rm -rf build && cd ../Exercises_2/phonebook_final && npm run build --prod && cp -r build ../Exercises_3",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint":"eslint ."
   },
   "keywords": [
     "phonebook",
@@ -26,6 +27,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^6.7.2",
     "nodemon": "^1.19.3"
   }
 }

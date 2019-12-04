@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -14,7 +16,7 @@ const cors = require('cors')
 app.use(cors())
 
 
-//Exercises 3.1-3.7 & 3.9-3.11 & 3.13-3.16 & 3.18
+//Exercises 3.1-3.7 & 3.9-3.11 & 3.13-3.16 & 3.18-3.19 OBS! Get back to 3.17 in end!
 
 let persons = [
   {
@@ -95,11 +97,10 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 
 //ADD person to persons URL
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body//json innehåll vi ger via webbsidan
   console.log("name of person to add " + body.name)
   console.log(request.body)
-
 
   const person = new Person({
     name: body.name,
@@ -110,6 +111,7 @@ app.post('/api/persons', (request, response) => {
     console.log(savedPerson)
     response.json(savedPerson.toJSON())
   })
+  .catch(error => next(error))
   
 })
 
@@ -124,7 +126,10 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
-  } 
+  }
+  else if(error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
 
   next(error)
 }

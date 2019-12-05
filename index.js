@@ -16,10 +16,9 @@ const cors = require('cors')
 app.use(cors())
 
 
-//Exercises 3.1-3.7 & 3.9-3.11 & 3.13-3.16 & 3.18-3.19,3.21
-// OBS! Get back to 3.17 in end!
+//Exercises 3.1-3.7 & 3.9-3.11 & 3.13-3.16 & 3.18,3.19,3.21,3.22
 
-//OBS! Push to Heroku master is git push origin master (ch-phonebook-db)
+//OBS! Push to Heroku master is git push origin master (ch-phonebook-db), git master is gitorigin
 let persons = [
   {
     "name": "Arto Hellas",
